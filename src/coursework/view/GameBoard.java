@@ -17,10 +17,8 @@
  */
 package coursework.view;
 
-import coursework.model.Ball;
-import coursework.model.Brick;
-import coursework.model.Player;
-import coursework.model.Wall;
+import coursework.model.*;
+
 
 import javax.swing.*;
 
@@ -49,6 +47,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     private Timer gameTimer;
 
     private Wall wall;
+    private Levels levels;
 
     private String message;
 
@@ -77,11 +76,11 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         this.initialize();
         message = "";
-        wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2,new Point(300,430));
-
-        debugConsole = new DebugConsole(owner,wall,this);
+        wall = new Wall(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),new Point(300,430));
+        levels = new Levels(new Rectangle(0,0,DEF_WIDTH,DEF_HEIGHT),30,3,6/2, wall);
+        debugConsole = new DebugConsole(owner,wall,levels,this);
         //initialize the first level
-        wall.nextLevel();
+        levels.nextLevel();
 
         gameTimer = new Timer(10,e ->{
             wall.move();
@@ -101,12 +100,12 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
             }
             else if(wall.isDone()){
-                if(wall.hasLevel()){
+                if(levels.hasLevel()){
                     message = "Go to Next Level";
                     gameTimer.stop();
                     wall.ballReset();
                     wall.wallReset();
-                    wall.nextLevel();
+                    levels.nextLevel();
                     wall.CheckScore();
                     wall.setScore(0);
                 }

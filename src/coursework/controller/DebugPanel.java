@@ -17,13 +17,14 @@
  */
 package coursework.controller;
 
+import coursework.model.Levels;
 import coursework.model.Wall;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
-
+import java.util.logging.Level;
 
 
 public class DebugPanel extends JPanel {
@@ -38,14 +39,15 @@ public class DebugPanel extends JPanel {
     private JSlider ballYSpeed;
 
     private Wall wall;
+    private Levels level;
 
-    public DebugPanel(Wall wall){
-
+    public DebugPanel(Wall wall, Levels level){
+        this.level = level;
         this.wall = wall;
 
         initialize();
 
-        skipLevel = makeButton("Skip Level",e -> wall.nextLevel());
+        skipLevel = makeButton("Skip Level",e -> level.nextLevel());
         resetBalls = makeButton("Reset Balls",e -> wall.resetBallCount());
 
         ballXSpeed = makeSlider(-4,4,e -> wall.setBallXSpeed(ballXSpeed.getValue()));

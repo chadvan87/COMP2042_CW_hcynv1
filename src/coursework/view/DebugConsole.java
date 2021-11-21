@@ -19,6 +19,7 @@ package coursework.view;
 
 import coursework.controller.DebugPanel;
 import coursework.model.Ball;
+import coursework.model.Levels;
 import coursework.model.Wall;
 
 import javax.swing.*;
@@ -35,16 +36,17 @@ public class DebugConsole extends JDialog implements WindowListener{
     private DebugPanel debugPanel;
     private GameBoard gameBoard;
     private Wall wall;
+    private Levels levels;
 
-
-    public DebugConsole(JFrame owner,Wall wall,GameBoard gameBoard){
+    public DebugConsole(JFrame owner,Wall wall,Levels levels,GameBoard gameBoard){
 
         this.wall = wall;
+        this.levels = levels;
         this.owner = owner;
         this.gameBoard = gameBoard;
         initialize();
 
-        debugPanel = new DebugPanel(wall);
+        debugPanel = new DebugPanel(wall, levels);
         this.add(debugPanel,BorderLayout.CENTER);
 
 
