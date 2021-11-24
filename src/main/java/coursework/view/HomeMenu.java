@@ -135,7 +135,7 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     }
 
     private void drawContainer(Graphics2D g2d){
-        background = new ImageIcon("src/coursework/resources/background.jpg").getImage();
+        background = new ImageIcon("src/main/java/coursework/resources/background.jpg").getImage();
         g2d.drawImage(background,0,0,null);
         
 
