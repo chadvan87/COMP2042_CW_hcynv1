@@ -1,17 +1,14 @@
 
 package coursework.model;
 
+import coursework.controller.ScoreController;
+import coursework.view.Sounds;
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.util.Random;
 
-import javax.swing.JOptionPane;
+import static coursework.controller.ScoreController.getInstance;
 
 
 public class Wall {
@@ -23,6 +20,7 @@ public class Wall {
     public Brick[] bricks;
     public Ball ball;
     public Player player;
+
 
     private Point startPoint;
 
@@ -38,12 +36,13 @@ public class Wall {
         this.brickCount = brickCount;
     }
 
+    Sounds sounds = new Sounds();
+
     private int brickCount;
     private int ballCount;
     private boolean ballLost;
 
-    private int score;
-    private String highScore = "Nobody:0";
+
 
     public Wall(Rectangle drawArea, Point ballPos){
 
@@ -91,8 +90,12 @@ public class Wall {
             /*for efficiency reverse is done into method impactWall
              * because for every brick program checks for horizontal and vertical impacts
              */
+            sounds.playSound("src/main/java/coursework/resources/Bounce.wav");
             brickCount--;
-            score += 5;
+            /**
+             * Increase score by 10 everytime the ball hit the wall
+             */
+            getInstance().setScore(getInstance().getScore()+10);
         }
         else if(impactBorder()) {
             ball.reverseX();
@@ -187,92 +190,6 @@ public class Wall {
 
     public void resetBallCount(){
         ballCount = 3;
-    }
-    //count score
-    public  int countScore() {
-        return score;
-    }
-    //get highscore
-    public String GetHighScore()  {
-
-        FileReader readFile = null;
-        BufferedReader reader = null;
-        try {
-            String last=null, line;
-            readFile = new FileReader("highscore.dat");
-            reader = new BufferedReader(readFile);
-            while ((line = reader.readLine()) != null) {
-                if (line != null) {
-                    last = line;
-                }
-            }
-            return last; //return the last line
-        }
-        catch (Exception e)
-        {
-            return "Nobody:0";
-        }
-        finally
-        {
-            try {
-                if (reader != null)
-                    reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    public void CheckScore() {
-        if (score >= Integer.parseInt((highScore.split(":")[1]))) {
-
-            String name = JOptionPane.showInputDialog("You set a new highScore. What 's your name?");
-            highScore = name + ":" + score;
-
-            File scoreFile = new File("highscore.dat");
-            if (!scoreFile.exists()) {
-                try {
-                    scoreFile.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            FileWriter writeFile = null;
-            BufferedWriter writer = null;
-            try {
-                writeFile = new FileWriter(scoreFile,true);
-                writer = new BufferedWriter(writeFile);
-                writer.write(this.highScore);
-                writer.newLine();
-            }
-            catch (Exception e) {
-
-            }
-            finally {
-                try {
-                    if (writer != null)
-                        writer.close();
-                }
-                catch (Exception e) {}
-
-            }
-        }
-    }
-
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public String getHighScore() {
-        return highScore;
-    }
-
-    public void setHighScore(String highScore) {
-        this.highScore = highScore;
     }
 
 }

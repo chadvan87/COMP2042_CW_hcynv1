@@ -27,6 +27,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.FontRenderContext;
 
+import static coursework.controller.ScoreController.*;
 
 
 public class GameBoard extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
@@ -85,13 +86,13 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         gameTimer = new Timer(10,e ->{
             wall.move();
             wall.findImpacts();
-            message = String.format("Bricks: %d Balls %d",wall.getBrickCount(),wall.getBallCount());
+            message = String.format("Bricks: %d Balls %d Score: %d",wall.getBrickCount(),wall.getBallCount(),getInstance().getScore());
             if(wall.isBallLost()){
                 if(wall.ballEnd()){
-                    wall.CheckScore();
                     wall.wallReset();
                     message = "Game over";
-                    wall.setScore(0);
+                    getInstance().CheckHighScore();
+                    getInstance().setScore(0);
 
 
                 }
@@ -106,14 +107,14 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
                     wall.ballReset();
                     wall.wallReset();
                     levels.nextLevel();
-                    wall.CheckScore();
-                    wall.setScore(0);
+                    getInstance().CheckHighScore();
+                    getInstance().setScore(0);
                 }
                 else{
                     message = "ALL WALLS DESTROYED";
                     gameTimer.stop();
-                    wall.CheckScore();
-                    wall.setScore(0);
+                    getInstance().CheckHighScore();
+                    getInstance().setScore(0);
 
                 }
             }
@@ -145,7 +146,7 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.drawString(message,250,225);
 
         drawBall(wall.ball,g2d);
-        drawscore(g2d);
+        drawHighscore(g2d);
         for(Brick b : wall.bricks)
             if(!b.isBroken())
                 drawBrick(b,g2d);
@@ -156,8 +157,8 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             drawMenu(g2d);
 
         Toolkit.getDefaultToolkit().sync();
-        if (wall.getHighScore() == ("")) {
-            wall.setHighScore(wall.GetHighScore());
+        if (getInstance().getHighScore() == ("")) {
+            getInstance().setHighScore(getInstance().GetHighScore());
         }
     }
 
@@ -281,12 +282,11 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setFont(tmpFont);
         g2d.setColor(tmpColor);
     }
-    //Draw Score
-    public void drawscore(Graphics g) {
-        g.setColor(Color.green);
-        g.setFont(new Font("serif",Font.BOLD,15));
-        g.drawString("Score: "+wall.countScore(), 0, 100);
-        g.drawString("Highscore: "+wall.GetHighScore(),0,125);
+    //Draw High Score on the screen
+    public void drawHighscore(Graphics g) {
+        g.setColor(Color.RED);
+        g.setFont(new Font("arial",Font.BOLD,15));
+        g.drawString("Best Score: "+getInstance().GetHighScore(),0,80);
     }
     @Override
     public void keyTyped(KeyEvent keyEvent) {
