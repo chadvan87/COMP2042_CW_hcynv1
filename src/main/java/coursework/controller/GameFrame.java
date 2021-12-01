@@ -19,6 +19,7 @@ package coursework.controller;
 
 import coursework.view.GameBoard;
 import coursework.view.HomeMenu;
+import coursework.view.Sounds;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +36,7 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     private boolean gaming;
 
+
     public GameFrame(){
         super();
 
@@ -47,7 +49,6 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         homeMenu = new HomeMenu(this,new Dimension(553,448));
 
         this.add(homeMenu,BorderLayout.CENTER);
-
         this.setUndecorated(true);
 
 
@@ -67,10 +68,13 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.add(gameBoard,BorderLayout.CENTER);
         this.setUndecorated(false);
         initialize();
+        Sounds.getSoundInstance().playInLoop("src/main/java/coursework/resources/GamePlaySong.wav");
         /*to avoid problems with graphics focus coursework.controller is added here*/
         this.addWindowFocusListener(this);
 
     }
+
+
 
     private void autoLocate(){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();

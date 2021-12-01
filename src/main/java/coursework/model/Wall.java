@@ -6,21 +6,31 @@ import coursework.view.Sounds;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-import java.util.Random;
 
 import static coursework.controller.ScoreController.getInstance;
 
 
 public class Wall {
 
-
-    private Random rnd;
     private Rectangle area;
 
-    public Brick[] bricks;
-    public Ball ball;
-    public Player player;
+    private Brick[] bricks;
+    private Ball ball;
 
+    public Ball getBall() {
+        return ball;
+    }
+
+
+    public Player getPlayer() {
+        return player;
+    }
+
+
+
+    private Player player;
+    private int speedX;
+    private int speedY;
 
     private Point startPoint;
 
@@ -36,7 +46,7 @@ public class Wall {
         this.brickCount = brickCount;
     }
 
-    Sounds sounds = new Sounds();
+
 
     private int brickCount;
     private int ballCount;
@@ -52,16 +62,14 @@ public class Wall {
         ballCount = 3;
         ballLost = false;
 
-        rnd = new Random();
+         speedX=3;
+         speedY= -3;
 
         makeBall(ballPos);
-        int speedX,speedY;
-        do{
-            speedX = rnd.nextInt(5) - 2;
-        }while(speedX == 0);
-        do{
-            speedY = -rnd.nextInt(3);
-        }while(speedY == 0);
+
+        ball.setXSpeed(speedX);
+        ball.setYSpeed(speedY);
+
 
         ball.setSpeed(speedX,speedY);
 
@@ -90,7 +98,7 @@ public class Wall {
             /*for efficiency reverse is done into method impactWall
              * because for every brick program checks for horizontal and vertical impacts
              */
-            sounds.playSound("src/main/java/coursework/resources/Bounce.wav");
+            Sounds.getSoundInstance().playSound("src/main/java/coursework/resources/Bounce.wav");
             brickCount--;
             /**
              * Increase score by 10 everytime the ball hit the wall
@@ -115,18 +123,18 @@ public class Wall {
                 //Vertical Impact
                 case Brick.UP_IMPACT:
                     ball.reverseY();
-                    return b.setImpact(ball.down, Crack.UP);
+                    return b.setImpact(ball.getDown(), Crack.UP);
                 case Brick.DOWN_IMPACT:
                     ball.reverseY();
-                    return b.setImpact(ball.up,Crack.DOWN);
+                    return b.setImpact(ball.getUp(),Crack.DOWN);
 
                 //Horizontal Impact
                 case Brick.LEFT_IMPACT:
                     ball.reverseX();
-                    return b.setImpact(ball.right,Crack.RIGHT);
+                    return b.setImpact(ball.getRight(),Crack.RIGHT);
                 case Brick.RIGHT_IMPACT:
                     ball.reverseX();
-                    return b.setImpact(ball.left,Crack.LEFT);
+                    return b.setImpact(ball.getLeft(),Crack.LEFT);
             }
         }
         return false;
@@ -152,15 +160,8 @@ public class Wall {
     public void ballReset(){
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
-        int speedX,speedY;
-        do{
-            speedX = rnd.nextInt(5) - 2;
-        }while(speedX == 0);
-        do{
-            speedY = -rnd.nextInt(3);
-        }while(speedY == 0);
-
-        ball.setSpeed(speedX,speedY);
+        ball.setXSpeed(speedX);
+        ball.setYSpeed(speedY);
         ballLost = false;
     }
 
@@ -191,5 +192,6 @@ public class Wall {
     public void resetBallCount(){
         ballCount = 3;
     }
+
 
 }
