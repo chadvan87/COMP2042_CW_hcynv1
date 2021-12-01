@@ -106,7 +106,7 @@ public class Crack {
         crack.append(path, true);
     }
 
-    /** Use method to call instead of using variable **/
+
     public int jump (){
         return crackDepth * 5;
     }

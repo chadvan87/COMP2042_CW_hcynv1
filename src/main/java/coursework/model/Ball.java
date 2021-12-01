@@ -5,20 +5,20 @@ import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
 
 
-/**
- * Created by filippo on 04/09/16.
- *
- */
+
 abstract public class Ball {
 
     private Shape ballFace;
 
     private Point2D center;
 
-    Point2D up;
-    Point2D down;
-    Point2D left;
-    Point2D right;
+    private Point2D up;
+    private Point2D down;
+
+
+    private Point2D left;
+    private Point2D right;
+
 
     private Color border;
     private Color inner;
@@ -126,6 +126,32 @@ abstract public class Ball {
     public int getSpeedY(){
         return speedY;
     }
+    public Point2D getUp() {
+        return up;
+    }
 
+    public void setUp(Point2D up) {
+        this.up = up;
+    }
+
+    public Point2D getDown() {
+        return down;
+    }
+
+    public void setDown(Point2D down) {
+        this.down = down;
+    }
+
+    public Point2D getLeft() {
+        return left;
+    }
+
+    public void setLeft(Point2D left) {
+        this.left = left;
+    }
+
+    public Point2D getRight() {
+        return right;
+    }
 
 }

@@ -34,9 +34,8 @@ public class ScoreController {
      */
     public static ScoreController getInstance(){
         if(instance == null){
-                if(instance == null){
-                    instance = new ScoreController();
-            }
+            instance = new ScoreController();
+
         }
         return instance;
     }
@@ -96,15 +95,14 @@ public class ScoreController {
                 writer.newLine();
             }
             catch (Exception e) {
-
+                System.out.println("Some Error happened");
             }
             finally {
                 try {
                     if (writer != null)
                         writer.close();
                 }
-                catch (Exception e) {}
-
+                catch (Exception e) { System.out.println("Some Error happend");}
             }
         }
     }
