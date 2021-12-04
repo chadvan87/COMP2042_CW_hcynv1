@@ -17,7 +17,6 @@
  */
 package coursework.controller;
 
-import coursework.view.GameBoard;
 import coursework.view.HomeMenu;
 import coursework.view.Sounds;
 

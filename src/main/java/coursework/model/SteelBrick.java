@@ -21,6 +21,8 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
+import static coursework.controller.ScoreController.getInstance;
+
 
 public class SteelBrick extends Brick {
 
@@ -60,6 +62,7 @@ public class SteelBrick extends Brick {
     public void impact(){
         if(rnd.nextDouble() < STEEL_PROBABILITY){
             super.impact();
+            getInstance().setScore(getInstance().getScore()+15); //Plus 25 points when user break Steel Brick
         }
     }
 

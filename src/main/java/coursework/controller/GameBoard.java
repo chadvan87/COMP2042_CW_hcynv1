@@ -15,9 +15,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package coursework.view;
+package coursework.controller;
 
 import coursework.model.*;
+import coursework.view.DebugConsole;
+import coursework.view.LeaderBoard;
 
 
 import javax.swing.*;
@@ -146,7 +148,9 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         clear(g2d);
 
         g2d.setColor(Color.BLUE);
-        g2d.drawString(message,250,225);
+        g2d.setFont(new Font("Arial", Font.PLAIN, 16)); //Change font size
+        g2d.drawString(message,200,225);
+
 
         drawBall(wall.getBall() ,g2d);
         drawHighscore(g2d);

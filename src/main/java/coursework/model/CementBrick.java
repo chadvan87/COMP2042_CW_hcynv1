@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 
+import static coursework.controller.ScoreController.getInstance;
+
 
 public class CementBrick extends Brick {
 
@@ -35,6 +37,7 @@ public class CementBrick extends Brick {
         super.impact();
         if(!super.isBroken()){
             crack.makeCrack(point,dir);
+            getInstance().setScore(getInstance().getScore()+10); //Plus 20 points when player break Cement Brick
             updateBrick();
             return false;
         }

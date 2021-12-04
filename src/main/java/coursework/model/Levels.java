@@ -3,17 +3,22 @@ package coursework.model;
 import java.awt.*;
 
 public class Levels {
-    private static final int LEVELS_COUNT = 4;
+    private static final int LEVELS_COUNT = 9;
 
     private static final int CLAY = 1;
     private static final int STEEL = 2;
     private static final int CEMENT = 3;
-    private static final int CONCRETE = 4;
+    private static final int Fast = 4;
+    private static final int Slow = 5;
 
     private Brick[][] levels;
     private int level;
 
-    private Wall wall;
+    public static Wall getWall() {
+        return wall;
+    }
+
+    private static Wall wall;
 
     public Levels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Wall wall){
         levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
@@ -106,16 +111,21 @@ public class Levels {
         }
         return tmp;
     }
-
+    // Add new Levels with 2 different type of brick Fast Brick and Slow Brick
     private Brick[][] makeLevels(Rectangle drawArea,int brickCount,int lineCount,double brickDimensionRatio){
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
         tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY);
-        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
-        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
-        tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
+        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,Fast,CEMENT); //New Level
+        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,Slow,CEMENT);  //New Level
+        tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
+        tmp[4] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
+        tmp[5] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio, Fast,STEEL);  //New Level
+        tmp[6] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio, CLAY,CEMENT);
+        tmp[7] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio, Slow,STEEL);  //New Level
+        tmp[8] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio, Slow,Fast);  //New Level
         return tmp;
     }
-
+    //Make Brick function
     private Brick makeBrick(Point point, Dimension size, int type){
         Brick out;
         switch(type){
@@ -127,6 +137,12 @@ public class Levels {
                 break;
             case CEMENT:
                 out = new CementBrick(point, size);
+                break;
+            case Fast:
+                out =  new FastBrick(point, size);
+                break;
+            case Slow:
+                out = new SlowBrick(point, size);
                 break;
             default:
                 throw new IllegalArgumentException(String.format("Unknown Type:%d\n",type));

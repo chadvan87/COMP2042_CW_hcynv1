@@ -18,6 +18,7 @@
 package coursework.view;
 
 import coursework.controller.DebugPanel;
+import coursework.controller.GameBoard;
 import coursework.model.Ball;
 import coursework.model.Levels;
 import coursework.model.Wall;
