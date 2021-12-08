@@ -4,6 +4,8 @@ import static coursework.controller.ScoreController.getInstance;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SlowBrick extends Brick {
 
@@ -31,11 +33,21 @@ public class SlowBrick extends Brick {
      * This method will set the speed of the ball to 1
      * when player hit the  brick
      */
-    private void SlowDown() {
+    private void SlowDown() { //speed up the ball
         if (super.isBroken()){
-            getInstance().setScore(getInstance().getScore()+8); //This will +18 points when ball hit fast brick
+            getInstance().setScore(getInstance().getScore()+7); //This will +17 points when ball hit fast brick
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Levels.getWall().setBallXSpeed(3);
+                    Levels.getWall().setBallYSpeed(-3);
+                    Player.setInnerColor(Color.GREEN);
+                }
+            }, 3000); //delay 3 sec
             Levels.getWall().setBallXSpeed(1);
             Levels.getWall().setBallYSpeed(1);
+            Player.setInnerColor(Color.YELLOW); //change the paddle to yellow
         }
     }
 
