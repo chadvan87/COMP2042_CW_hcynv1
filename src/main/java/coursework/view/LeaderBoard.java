@@ -37,7 +37,7 @@ public class LeaderBoard {
         String line = "";
         //Try to read the high score file
         try{
-            BufferedReader reader = new BufferedReader(new FileReader("highscore.dat"));
+            BufferedReader reader = new BufferedReader(new FileReader("all_highscore.dat"));
             while((line=reader.readLine())!=null){
             str.add(line);
         }

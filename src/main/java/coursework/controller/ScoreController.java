@@ -7,6 +7,7 @@ public class ScoreController {
    //Create variables for score and high score
     private int score;
     private String highScore = "Nobody:0";
+    private static final String HIGHSCORE_FILE="all_highscore.dat"; //file to store all users' high scores
     //Create getter and setter
     public int getScore() {
         return score;
@@ -47,7 +48,7 @@ public class ScoreController {
         FileReader readFile = null;
         BufferedReader reader = null;
         try {
-            readFile = new FileReader("highscore.dat");
+            readFile = new FileReader(HIGHSCORE_FILE);
             reader = new BufferedReader(readFile);
             while ((line = reader.readLine()) != null) {
                 if (line != null) {
@@ -78,7 +79,7 @@ public class ScoreController {
             String name = JOptionPane.showInputDialog("You set a new highScore. What 's your name?");
             highScore = name + ":" + score;
 
-            File scoreFile = new File("highscore.dat");
+            File scoreFile = new File(HIGHSCORE_FILE);
             if (!scoreFile.exists()) {
                 try {
                     scoreFile.createNewFile();
