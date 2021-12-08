@@ -73,7 +73,7 @@ public class ScoreController {
         }
     }
     public void CheckHighScore() {
-        GetHighScore();
+        GetHighScore(); //This is to keep track of high score after user close the game
         if (score > Integer.parseInt((highScore.split(":")[1]))) {
 
             String name = JOptionPane.showInputDialog("You set a new highScore. What 's your name?");
