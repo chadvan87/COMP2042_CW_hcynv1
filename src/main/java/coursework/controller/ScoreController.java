@@ -42,7 +42,6 @@ public class ScoreController {
     }
     private String last=null, line;
     //Method for checking high score
-    //get highscore
     public String GetHighScore()  {
 
         FileReader readFile = null;
