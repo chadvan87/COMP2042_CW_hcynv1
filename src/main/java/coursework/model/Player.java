@@ -30,6 +30,8 @@ public class Player {
 
     private Rectangle playerFace;
     private Point ballPoint;
+
+
     private int moveAmount;
     private int min;
     private int max;
@@ -88,4 +90,5 @@ public class Player {
     public static void setInnerColor(Color color){
         Player.INNER_COLOR = color;
     }
+    public int getMoveAmount() {return moveAmount;}
 }

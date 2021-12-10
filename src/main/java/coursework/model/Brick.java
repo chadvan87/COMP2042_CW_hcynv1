@@ -36,6 +36,7 @@ abstract public class Brick  {
     private Color inner;
 
     private int fullStrength;
+
     private int strength;
 
     private boolean broken;
@@ -107,7 +108,9 @@ abstract public class Brick  {
     public static Random getRnd() {
         return rnd;
     }
-
+    public int getStrength() {
+        return strength;
+    }
 
 }
 
