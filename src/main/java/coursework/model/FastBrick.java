@@ -60,7 +60,7 @@ public class FastBrick extends Brick {
                     Levels.getWall().setBallXSpeed(3);
                     Levels.getWall().setBallYSpeed(-3);
                 }
-            }, 3000); //delay 3 sec
+            }, 5000); //delay 5 secs
             Levels.getWall().setBallXSpeed(4);
             Levels.getWall().setBallYSpeed(4);
         }
@@ -77,7 +77,7 @@ public class FastBrick extends Brick {
                 Player.setDefMoveAmount(5); //default speed of the paddle
                 Player.setInnerColor(Color.GREEN); //default color of the paddle
             }
-        }, 3000); //delay 3 sec
+        }, 5000); //delay 5 sec
 
         Player.setInnerColor(Color.RED);
         Player.setDefMoveAmount(11);

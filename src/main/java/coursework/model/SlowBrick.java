@@ -59,7 +59,7 @@ public class SlowBrick extends Brick {
                     Levels.getWall().setBallYSpeed(-3);
                     Player.setInnerColor(Color.GREEN);
                 }
-            }, 3000); //delay 3 sec
+            }, 5000); //delay 5 sec
             Levels.getWall().setBallXSpeed(1);
             Levels.getWall().setBallYSpeed(1);
             Player.setInnerColor(Color.YELLOW); //change the paddle to yellow
