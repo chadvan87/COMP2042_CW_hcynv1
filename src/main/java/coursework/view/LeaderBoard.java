@@ -6,7 +6,12 @@ import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
-
+/**
+ * Created by Nguyen Ha Van on 11/12/2021
+ * @author Van
+ * @since 11/12/2021
+ *
+ */
 public class LeaderBoard {
     static String lineSeparator = System.getProperty("line.separator"); //This variable use for displaying Leaderboard
     /**

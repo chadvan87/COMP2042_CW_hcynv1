@@ -28,6 +28,12 @@ import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+/**
+ * Created by Nguyen Ha Van on 11/12/2021
+ * @author Van
+ * @since 11/12/2021
+ *
+ */
 public class DebugConsole extends JDialog implements WindowListener{
 
     private static final String TITLE = "Debug Console";
@@ -38,7 +44,13 @@ public class DebugConsole extends JDialog implements WindowListener{
     private GameBoard gameBoard;
     private Wall wall;
     private Levels levels;
-
+    /**
+     * Constructor of Debug Console
+     * @param owner JFrame Owner that will display the debug console screen
+     * @param wall from Wall class
+     * @param levels from Level class
+     * @param gameBoard from Game Board class
+     */
     public DebugConsole(JFrame owner,Wall wall,Levels levels,GameBoard gameBoard){
 
         this.wall = wall;
@@ -53,7 +65,9 @@ public class DebugConsole extends JDialog implements WindowListener{
 
         this.pack();
     }
-
+    /**
+     *Initialize the debug console and display the screen
+     */
     private void initialize(){
         this.setModal(true);
         this.setTitle(TITLE);
@@ -63,14 +77,20 @@ public class DebugConsole extends JDialog implements WindowListener{
         this.setFocusable(true);
     }
 
-
+    /**
+     * Set the position of the debug console screen.
+     */
     private void setLocation(){
         int x = ((owner.getWidth() - this.getWidth()) / 2) + owner.getX();
         int y = ((owner.getHeight() - this.getHeight()) / 2) + owner.getY();
         this.setLocation(x,y);
     }
 
-
+    /**
+     * When the debug console screen is closed, the game board is painted
+     * and displayed on the screen.
+     * @param windowEvent is the user's window screen
+     */
     @Override
     public void windowOpened(WindowEvent windowEvent) {
 
@@ -95,7 +115,10 @@ public class DebugConsole extends JDialog implements WindowListener{
     public void windowDeiconified(WindowEvent windowEvent) {
 
     }
-
+    /**
+     * Displays the debug console screen
+     * @param windowEvent is the user's window screen
+     */
     @Override
     public void windowActivated(WindowEvent windowEvent) {
         setLocation();

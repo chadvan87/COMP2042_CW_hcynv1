@@ -5,6 +5,12 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Created by Nguyen Ha Van on 11/12/2021
+ * @author Van
+ * @since 11/12/2021
+ *
+ */
 public class Sounds {
 
     /**
@@ -28,7 +34,8 @@ public class Sounds {
     }
 
     /**
-     * Play sound one time
+     * playSound() will play sound one time
+     * @param file is the file that will play sound
      */
     public void playSound(String file){
         try {
@@ -44,7 +51,8 @@ public class Sounds {
         }
     }
     /**
-     * Play sound in a loop
+     * playInLoop() will play sound in a loop
+     * @param filename is the file that will play sound in a loop
      */
     public void playInLoop(String filename) {
         try {

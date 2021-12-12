@@ -9,7 +9,12 @@ import java.awt.geom.Point2D;
 
 import static coursework.controller.ScoreController.getInstance;
 
-
+/**
+ * Created by Nguyen Ha Van on 11/12/2021
+ * @author Van
+ * @since 11/12/2021
+ *
+ */
 public class Wall {
 
     private Rectangle area;
@@ -53,7 +58,11 @@ public class Wall {
     private boolean ballLost;
 
 
-
+    /**
+     * Constructor of Wall
+     * @param drawArea is the rectangle of the game screen
+     * @param ballPos is the starting ball position
+     */
     public Wall(Rectangle drawArea, Point ballPos){
 
         this.startPoint = new Point(ballPos);
@@ -79,17 +88,24 @@ public class Wall {
 
 
     }
-
+    /**
+     * makeBall() will make the ball that will be used in the game
+     * @param ballPos is the starting ball position
+     */
     private void makeBall(Point2D ballPos){
         ball = new RubberBall(ballPos);
     }
 
-
+    /**
+     * move() will move the player bar and ball
+     */
     public void move(){
         player.move();
         ball.move();
     }
-
+    /**
+     * findImpacts() is used when the ball collides with a brick or the side and top borders.
+     */
     public void findImpacts(){
         if(player.impact(ball)){
             ball.reverseY();
@@ -117,6 +133,11 @@ public class Wall {
         }
     }
 
+    /**
+     * When the ball strikes the brick
+     * @return if the strength is 1, the brick will break; otherwise,
+     * the brick will crack and the strength will decrease.
+     */
     private boolean impactWall(){
         for(Brick b : bricks){
             switch(b.findImpact(ball)) {
@@ -139,12 +160,18 @@ public class Wall {
         }
         return false;
     }
-
+    /**
+     * impactBorder is to check to see if the ball has made contact with the top and side borders.
+     * @return
+    If there is an impact, return true; otherwise, return false.
+     */
     private boolean impactBorder(){
         Point2D p = ball.getPosition();
         return ((p.getX() < area.getX()) ||(p.getX() > (area.getX() + area.getWidth())));
     }
-
+    /**
+     * getBrickCount(), getBallCount(), isBallLost() is getter for variables in Wall Class
+     */
     public int getBrickCount(){
         return brickCount;
     }
@@ -157,6 +184,9 @@ public class Wall {
         return ballLost;
     }
 
+    /**
+     *ballReset() will reset the ball speed and return the ball and player bar to their original positions.
+     */
     public void ballReset(){
         player.moveTo(startPoint);
         ball.moveTo(startPoint);
@@ -164,7 +194,9 @@ public class Wall {
         ball.setYSpeed(speedY);
         ballLost = false;
     }
-
+    /**
+     * wallReset() will reset the wall, brick count and ball count
+     */
     public void wallReset(){
         for(Brick b : bricks)
             b.repair();
@@ -172,26 +204,35 @@ public class Wall {
         ballCount = 3;
     }
 
+    /**
+     * @return  the ball Count at the end of game
+     */
     public boolean ballEnd(){
         return ballCount == 0;
     }
-
+    /**
+     * @return isDone() set Brick Count to 0
+     */
     public boolean isDone(){
         return brickCount == 0;
     }
 
-
+    /**
+     * setBallXSpeed() set the ball speed on x-axis
+     */
     public void setBallXSpeed(int s){
         ball.setXSpeed(s);
     }
-
+    /**
+     * setBallYSpeed() set the ball speed on u-axis
+     */
     public void setBallYSpeed(int s){
         ball.setYSpeed(s);
     }
-
+    /**
+     * resetBallCount() set the ball count to 3
+     */
     public void resetBallCount(){
         ballCount = 3;
     }
-
-
 }

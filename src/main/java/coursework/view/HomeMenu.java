@@ -29,6 +29,12 @@ import java.awt.geom.Rectangle2D;
 import java.awt.Image;
 
 
+/**
+ * Created by Nguyen Ha Van on 11/12/2021
+ * @author Van
+ * @since 11/12/2021
+ *
+ */
 public class HomeMenu extends JComponent implements MouseListener, MouseMotionListener {
 
     private static final String GREETINGS = "Welcome to:";
@@ -68,7 +74,11 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     private boolean infoClicked;
     private Image background;
 
-
+    /**
+     * Constructor of HomeMenu
+     * @param owner Game Frame owner will configure the home menu screen.
+     * @param area will set the screen size
+     */
     public HomeMenu(GameFrame owner,Dimension area){
 
         this.setFocusable(true);
@@ -102,12 +112,18 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
     }
 
-
+    /**
+     * paint() paints the screen, displaying text, buttons, pictures, and background images.
+     * @param g is a graphics parameter that displays the screen's contents.
+     */
     public void paint(Graphics g){
         drawMenu((Graphics2D)g);
     }
 
-
+    /**
+     *drawMenu() will create a menu screen with images, text, and buttons.
+     * @param g2d is a graphics2d parameter
+     */
     public void drawMenu(Graphics2D g2d){
 
         drawContainer(g2d);
@@ -135,13 +151,19 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         g2d.setColor(prevColor);
 
     }
-
+    /**
+     * Draw the background image
+     * @param  g2d  is a graphics2d parameter
+     */
     private void drawContainer(Graphics2D g2d){
         background = new ImageIcon("src/main/java/coursework/resources/background.jpg").getImage();
         g2d.drawImage(background,0,0,null);
 
     }
-
+    /**
+     * Draw the text(greetings and title)
+     * @param g2d is a graphics2d parameter
+     */
     private void drawText(Graphics2D g2d){
 
         g2d.setColor(TEXT_COLOR);
@@ -174,7 +196,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
 
 
     }
-
+    /**
+     * drawButton will draw the button in the game like start,exit,scores,info
+     * @param g2d is graphics2d parameter
+     */
     private void drawButton(Graphics2D g2d){
 
         FontRenderContext frc = g2d.getFontRenderContext();
@@ -274,7 +299,13 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         }
 
     }
-
+    /** mouseClicked() method
+     * When the start button is pressed, the game begins.
+     * When the exit button is pressed, the game ends.
+     * When the info button is pressed, the info page is shown
+     * When scores button is pressed, show the leaderboard
+     * @param mouseEvent is the user's mouse when clicked
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -301,7 +332,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     }
 
 
-
+    /** mousePressed() method
+     * When buttons are clicked, change the color of the button text and border.
+     * @param mouseEvent is the user's mouse when clicked
+     */
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -316,7 +350,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
         }
 
     }
-
+    /**
+     * When buttons are clicked, change the color of the button text and border to the original.
+     * @param mouseEvent is the user's mouse when clicked
+     */
     @Override
     public void mouseReleased(MouseEvent mouseEvent) {
         if(startClicked ){
@@ -344,7 +381,10 @@ public class HomeMenu extends JComponent implements MouseListener, MouseMotionLi
     public void mouseDragged(MouseEvent mouseEvent) {
 
     }
-
+    /**
+     * mouseMoved will change the mouse to hand cursor
+     * @param mouseEvent is the user's mouse when clicked
+     */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();

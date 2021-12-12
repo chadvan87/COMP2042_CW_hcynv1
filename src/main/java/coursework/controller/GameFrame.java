@@ -25,7 +25,12 @@ import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 
-
+/**
+ * Created by Nguyen Ha Van on 11/12/2021
+ * @author Van
+ * @since 11/12/2021
+ *
+ */
 public class GameFrame extends JFrame implements WindowFocusListener {
 
     private static final String DEF_TITLE = "Brick Destroy";
@@ -35,7 +40,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
     private boolean gaming;
 
-
+    /**
+     * Game Frame Constructor that will be the controller of everything in the game
+     */
     public GameFrame(){
         super();
 
@@ -52,7 +59,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
 
 
     }
-
+    /**
+     * initialize() will set up the game frame and the game screen.
+     */
     public void initialize(){
         this.setTitle(DEF_TITLE);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -60,7 +69,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.autoLocate();
         this.setVisible(true);
     }
-
+    /**
+     * enableGameBoard() will start the game and play music
+     */
     public void enableGameBoard(){
         this.dispose();
         this.remove(homeMenu);
@@ -74,7 +85,9 @@ public class GameFrame extends JFrame implements WindowFocusListener {
     }
 
 
-
+    /**
+     * Set the screen in the center of the user's screen
+     */
     private void autoLocate(){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (size.width - this.getWidth()) / 2;
@@ -82,7 +95,10 @@ public class GameFrame extends JFrame implements WindowFocusListener {
         this.setLocation(x,y);
     }
 
-
+    /**
+     * The user will be able to play the game when the window screen is focused.
+     * @param windowEvent is the user's window screen
+     */
     @Override
     public void windowGainedFocus(WindowEvent windowEvent) {
         /*
@@ -95,7 +111,10 @@ public class GameFrame extends JFrame implements WindowFocusListener {
          */
         gaming = true;
     }
-
+    /** windowLostFocus()
+     *  Everything will stop when the window screen lost focused
+     * @param windowEvent user's window screen
+     */
     @Override
     public void windowLostFocus(WindowEvent windowEvent) {
         if(gaming)

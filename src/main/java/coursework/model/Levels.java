@@ -2,6 +2,12 @@ package coursework.model;
 
 import java.awt.*;
 
+/**
+ * Created by Nguyen Ha Van on 11/12/2021
+ * @author Van
+ * @since 11/12/2021
+ *
+ */
 public class Levels {
     private static final int LEVELS_COUNT = 9;
 
@@ -19,14 +25,29 @@ public class Levels {
     }
 
     private static Wall wall;
-
+    /**
+     * Constructor for Levels class which will show bricks on each level.
+     * @param drawArea is the size of the bricks level
+     * @param brickCount is the number of bricks
+     * @param lineCount is the number of line
+     * @param brickDimensionRatio is the size of bricks
+     * @param wall from Wall class
+     */
     public Levels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Wall wall){
         levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
         level = 0;
         this.wall = wall;
 
     }
-
+    /**
+     * The bricks in all the rows are the same.
+     * @param drawArea is the size of the bricks level
+     * @param brickCnt is the number of bricks
+     * @param lineCnt is the number of lines
+     * @param brickSizeRatio is the size of the brick
+     * @param type is the type of the brick
+     * @return the three layer of bricks
+     */
     private Brick[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type){
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
@@ -66,7 +87,16 @@ public class Levels {
         return tmp;
 
     }
-
+    /**
+     * The bricks are alternated one at a time.
+     * @param drawArea is the size of the bricks level
+     * @param brickCnt is the number of bricks
+     * @param lineCnt is the number of lines
+     * @param brickSizeRatio is the size of the brick
+     * @param typeA is the first type of brick
+     * @param typeB is the second type of brick
+     * @return the three layer of alternate placing bricks
+     */
     private Brick[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
@@ -111,7 +141,15 @@ public class Levels {
         }
         return tmp;
     }
-    // Add new Levels with 2 different type of brick Fast Brick and Slow Brick
+    /**
+     * Each level contains different types of bricks and design.
+     * @param drawArea is the size of the bricks level
+     * @param brickCount is the number of brick
+     * @param lineCount is the number of line
+     * @param brickDimensionRatio is the size of the brick
+     * Add new Levels with 2 different type of brick Fast Brick and Slow Brick
+     * @return each level with different pattern and bricks
+     */
     private Brick[][] makeLevels(Rectangle drawArea,int brickCount,int lineCount,double brickDimensionRatio){
         Brick[][] tmp = new Brick[LEVELS_COUNT][];
         tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY);
@@ -125,7 +163,13 @@ public class Levels {
         tmp[8] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio, Slow,Fast);  //New Level
         return tmp;
     }
-    //Make Brick function
+    /**
+     * makeBrick() will make the brick and its color
+     * @param point is the coordinate X and Y of the bricks
+     * @param size is the size of the bricks
+     * @param type is the type of the bricks
+     * @return created bricks
+     */
     private Brick makeBrick(Point point, Dimension size, int type){
         Brick out;
         switch(type){
@@ -149,12 +193,19 @@ public class Levels {
         }
         return  out;
     }
-
+    /**
+     * nextLevel() will Advance to the next level and
+     * set the brick based on the level if there are more.
+     */
     public void nextLevel(){
         wall.setBricks(levels[level++]);
         wall.setBrickCount(wall.getBricks().length);
     }
 
+    /**
+     * hasLevel() will check if there is more levels
+     * @return the player's current level
+     */
     public boolean hasLevel(){
         return level < levels.length;
     }

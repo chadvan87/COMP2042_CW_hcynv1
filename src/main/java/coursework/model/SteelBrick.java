@@ -23,7 +23,12 @@ import java.util.Random;
 
 import static coursework.controller.ScoreController.getInstance;
 
-
+/**
+ * Created by Nguyen Ha Van on 11/12/2021
+ * @author Van
+ * @since 11/12/2021
+ *
+ */
 public class SteelBrick extends Brick {
 
     private static final String NAME = "Steel Brick";
@@ -34,7 +39,11 @@ public class SteelBrick extends Brick {
 
     private Random rnd;
     private Shape brickFace;
-
+    /**
+     * Constructor of Steel Brick
+     * @param point determine the brick's X and Y coordinates.
+     * @param size is the size of the brick
+     */
     public SteelBrick(Point point, Dimension size){
         super(NAME,point,size,DEF_BORDER,DEF_INNER,STEEL_STRENGTH);
         rnd = new Random();
@@ -43,22 +52,38 @@ public class SteelBrick extends Brick {
 
 
     @Override
+    /**
+     * makeBrickFace() create the steel brick
+     * @param pos is the brick's X and Y coordinates.
+     * @param size is the brick's size
+     */
     protected Shape makeBrickFace(Point pos, Dimension size) {
         return new Rectangle(pos,size);
     }
 
     @Override
+    /**
+     * getBrick() will return the Steel Brick's face
+     */
     public Shape getBrick() {
         return brickFace;
     }
-
+    /**
+     * setImpact() is called when the brick has an impact
+     * @param point the brick's X and Y coordinates
+     * @param dir direction in which the brick is contacted and shattered
+     * @return broken brick
+     */
     public  boolean setImpact(Point2D point , int dir){
         if(super.isBroken())
             return false;
         impact();
         return  super.isBroken();
     }
-
+    /**
+     * If the random number created when a brick is hit is smaller than the probability of a brick,
+     * the strength is reduced by one.
+     */
     public void impact(){
         if(rnd.nextDouble() < STEEL_PROBABILITY){
             super.impact();
