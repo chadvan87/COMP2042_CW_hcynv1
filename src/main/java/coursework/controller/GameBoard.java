@@ -31,7 +31,12 @@ import java.awt.font.FontRenderContext;
 
 import static coursework.controller.ScoreController.*;
 
-
+/**
+ * Created by Nguyen Ha Van on 11/12/2021
+ * @author Van
+ * @since 11/12/2021
+ *
+ */
 public class GameBoard extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
 
     private static final String CONTINUE = "Continue";
@@ -65,7 +70,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
     private DebugConsole debugConsole;
 
-
+    /**
+     * Constructor of Game Board
+     * @param owner JFrame Owner that will display the debug console screen
+     */
     public GameBoard(JFrame owner){
         super();
 
@@ -130,7 +138,9 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     }
 
 
-
+    /**
+     * initialize() will set up the game board and the game screen.
+     */
     private void initialize(){
         this.setPreferredSize(new Dimension(DEF_WIDTH,DEF_HEIGHT));
         this.setFocusable(true);
@@ -140,7 +150,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         this.addMouseMotionListener(this);
     }
 
-
+    /**
+     * paint() paints the screen, displaying text, bricks, ball, and player.
+     * @param g is a graphics parameter that displays the screen's contents.
+     */
     public void paint(Graphics g){
 
         Graphics2D g2d = (Graphics2D) g;
@@ -168,14 +181,21 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             getInstance().setHighScore(getInstance().GetHighScore());
         }
     }
-
+    /**
+     * clear() will clear the game screen
+     * @param g2d is graphics2d parameter
+     */
     private void clear(Graphics2D g2d){
         Color tmp = g2d.getColor();
         g2d.setColor(BG_COLOR);
         g2d.fillRect(0,0,getWidth(),getHeight());
         g2d.setColor(tmp);
     }
-
+    /**
+     *  drawBrick() will draw and set color of bricks
+     * @param brick from Brick class
+     * @param g2d is graphics2d parameter
+     */
     private void drawBrick(Brick brick,Graphics2D g2d){
         Color tmp = g2d.getColor();
 
@@ -188,7 +208,11 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         g2d.setColor(tmp);
     }
-
+    /**
+     * drawBall() will draw and set color of balls
+     * @param ball from Ball class
+     * @param g2d is graphics2d parameter
+     */
     private void drawBall(Ball ball, Graphics2D g2d){
         Color tmp = g2d.getColor();
 
@@ -202,7 +226,11 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         g2d.setColor(tmp);
     }
-
+    /**
+     *  drawPlayer() will draw and set color of players
+     * @param p from Player class
+     * @param g2d graphics2d parameter
+     */
     private void drawPlayer(Player p, Graphics2D g2d){
         Color tmp = g2d.getColor();
 
@@ -215,12 +243,18 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
 
         g2d.setColor(tmp);
     }
-
+    /**
+     * drawMenu() will draw the game as well as the pause menu.
+     * @param g2d is graphics2d parameter
+     */
     private void drawMenu(Graphics2D g2d){
         obscureGameBoard(g2d);
         drawPauseMenu(g2d);
     }
-
+    /**
+     * obscureGameBoard() will draw the game
+     * @param g2d is graphics2d parameter
+     */
     private void obscureGameBoard(Graphics2D g2d){
 
         Composite tmp = g2d.getComposite();
@@ -235,7 +269,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setComposite(tmp);
         g2d.setColor(tmpColor);
     }
-
+    /**
+     * drawPauseMenu() will draw the pause menu when user press Esc key
+     * @param g2d is graphics2d parameter
+     */
     private void drawPauseMenu(Graphics2D g2d){
         Font tmpFont = g2d.getFont();
         Color tmpColor = g2d.getColor();
@@ -289,7 +326,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
         g2d.setFont(tmpFont);
         g2d.setColor(tmpColor);
     }
-    //Draw High Score on the screen
+    /**
+     * drawHighscore() will draw the current highest score on screen
+     * @param g is graphics parameter
+     */
     public void drawHighscore(Graphics g) {
         g.setColor(Color.RED);
         g.setFont(new Font("arial",Font.BOLD,15));
@@ -298,7 +338,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     @Override
     public void keyTyped(KeyEvent keyEvent) {
     }
-
+    /**
+     * keyPressed() will be used when user press his keyboard, A, D, ESC, SPACE, ALT+SHIFT+F1
+     * @param keyEvent is the user's keyboard button pressed
+     */
     @Override
     public void keyPressed(KeyEvent keyEvent) {
         switch(keyEvent.getKeyCode()){
@@ -329,10 +372,17 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     }
 
     @Override
+    /**
+     *keyReleased() will be used when user stop press A or D, the player bar stops moving
+     * @param keyEvent is user's keyboard button pressed
+     */
     public void keyReleased(KeyEvent keyEvent) {
         wall.getPlayer().stop();
     }
-
+    /**
+     * When the pause menu windows appear, the user can choose to continue, restart, or quit.
+     * @param mouseEvent is user's mouse when clicked
+     */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -379,7 +429,10 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
     public void mouseDragged(MouseEvent mouseEvent) {
 
     }
-
+    /**
+     *Change the cursor to a hand cursor when the user moves the pointer to the exit, continue, or restart buttons.
+     * @param mouseEvent is user's mouse move
+     */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
@@ -393,7 +446,9 @@ public class GameBoard extends JComponent implements KeyListener,MouseListener,M
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
-
+    /**
+     * When the game screen loses focus, it indicates focus lost and stops the game as well as the game timer.
+     */
     public void onLostFocus(){
         gameTimer.stop();
         message = "Focus Lost";

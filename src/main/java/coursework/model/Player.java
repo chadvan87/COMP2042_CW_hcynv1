@@ -20,6 +20,12 @@ package coursework.model;
 import java.awt.*;
 
 
+/**
+ * Created by Nguyen Ha Van on 11/12/2021
+ * @author Van
+ * @since 11/12/2021
+ *
+ */
 public class Player {
 
 
@@ -36,7 +42,14 @@ public class Player {
     private int min;
     private int max;
 
-
+    /**
+     * Constructor of Player class
+     * @param ballPoint  is the ball's X and Y coordinates,
+     *                   so that the bar(Player) is directly beneath the ball.
+     * @param width is width of the bar(Player)
+     * @param height is the height of the bar(Player)
+     * @param container is the bar(Player)
+     */
     public Player(Point ballPoint,int width,int height,Rectangle container) {
         this.ballPoint = ballPoint;
         moveAmount = 0;
@@ -44,18 +57,28 @@ public class Player {
         min = container.x + (width / 2);
         max = min + container.width - width;
         setDefMoveAmount(5);
-
     }
-
+    /**
+     * makeRectangle() will make the bar(Player)
+     * @param width is width of the bar(Player)
+     * @param height is height of the bar(Player)
+     * @return
+     */
     private Rectangle makeRectangle(int width,int height){
         Point p = new Point((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY());
         return  new Rectangle(p,new Dimension(width,height));
     }
-
+    /**
+     * impact() will make the impact of the ball and the bar(Player)
+     * @param b ball
+     * @return true if impact(), else false
+     */
     public boolean impact(Ball b){
         return playerFace.contains(b.getPosition()) && playerFace.contains(b.getDown()) ;
     }
-
+    /**
+     * move() will make sure the bar(Player) is not covering the entire screen by moving it to the left and right.
+     */
     public void move(){
         double x = ballPoint.getX() + moveAmount;
         if(x < min || x > max)
@@ -63,7 +86,9 @@ public class Player {
         ballPoint.setLocation(x,ballPoint.getY());
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
     }
-
+    /**
+     * moveLeft() and moveRight() functions help the player move left and right
+     */
     public void moveLeft(){
         moveAmount = -DEF_MOVE_AMOUNT;
     }
@@ -71,19 +96,29 @@ public class Player {
     public void moveRight(){
         moveAmount = DEF_MOVE_AMOUNT;
     }
-
+    /**
+     * stop() will stop the player from moving
+     */
     public void stop(){
         moveAmount = 0;
     }
-
+    /**
+     * getter method for playerFace
+     */
     public Shape getPlayerFace(){
         return  playerFace;
     }
-
+    /**
+     * moveTo() will set the position of the bar(Player)
+     * @param p coordinate X and Y
+     */
     public void moveTo(Point p){
         ballPoint.setLocation(p);
         playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
     }
+    /**
+     * Getter and setter for variables in the class
+     */
     public static void setDefMoveAmount(int DEF_MOVE_AMOUNT){
         Player.DEF_MOVE_AMOUNT = DEF_MOVE_AMOUNT;
     }
